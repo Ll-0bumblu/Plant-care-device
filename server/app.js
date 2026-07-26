@@ -9,6 +9,7 @@ require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0'
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
@@ -26,7 +27,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Swagger UI доступен по адресу http://localhost:${PORT}/api-docs`);
 });
