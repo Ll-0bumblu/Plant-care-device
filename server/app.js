@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const measurementRoutes = require('./routes/measurementRoutes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
 
 require('./db');
 
@@ -10,6 +12,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/measurements', measurementRoutes);
 
@@ -24,4 +28,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Swagger UI доступен по адресу http://localhost:${PORT}/api-docs`);
 });
