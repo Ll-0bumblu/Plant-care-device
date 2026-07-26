@@ -33,7 +33,7 @@ std::vector<Sensor*> sensors = { &dht, &soil, &light };
 DataSender sender(serverUrl);
 
 unsigned long previousMillis = 0;
-const long interval = 10* 1000;  // 10 секунд
+const long interval = 60* 1000;  // 10 секунд
 
 void setup() {
     Serial.begin(9600);
